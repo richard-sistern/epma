@@ -84,7 +84,7 @@ function Logger {
 #>
 
 
-Logger -message "Stopping CACHE environment $($cache_env)"
+Logger -message "Stopping CACHE environment $cache_env"
 Start-Process $cache_control -ArgumentList "stop $cache_env" -Wait
 
 Start-Sleep -s 60  
@@ -102,7 +102,7 @@ try {
     Rename-Item -Path $train_db_path -newName $backup_db_path -ErrorAction Stop
 }
 catch {
-    Logger -level "ERROR" -message "Unable to rename $($train_db_path) to $backup_db_path"
+    Logger -level "ERROR" -message "Unable to rename $train_db_path to $backup_db_path"
     Logger -level "ERROR" -message "This may be due to WellSky being connected and accessing $cache_env"
     Exit
 }
@@ -114,5 +114,5 @@ Copy-Item -Path $base_db_path -Destination $train_db_path -Recurse
 Logger -message "Finished copying BASE"
 
 Start-Sleep -s 300
-Logger -message "Starting CACHE environemnt $($cache_env)"
+Logger -message "Starting CACHE environemnt $cache_env"
 Start-Process $cache_control -ArgumentList "start $cache_env" -Wait
